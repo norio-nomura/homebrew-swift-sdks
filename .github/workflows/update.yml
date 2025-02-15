@@ -1,0 +1,23 @@
+name: Update Casks
+
+on:
+  schedule:
+    - cron: "0 4 * * *"
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Bump Casks
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          brew tap norio-nomura/swift-sdks
+          cd $(brew --repo norio-nomura/swift-sdks)
+          git remote set-url origin https://${GITHUB_REPOSITORY_OWNER}:${HOMEBREW_GITHUB_API_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          ./bump-casks.sh && git push origin main
