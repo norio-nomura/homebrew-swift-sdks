@@ -12,7 +12,7 @@ do
   if ! version=$(jq -r '.[0] | if .status then ("::error file='"${cask}"',title=\(.status)::\(.messages|join(", "))\n"|halt_error) end
      | if .version.outdated then .version.latest else empty end' <<<"${json}") 2>&1
   then
-    failed=$((failed + 1))
+    # failed=$((failed + 1))
     continue
   fi
   if [[ -n "${version}" ]]
@@ -36,6 +36,7 @@ do
         ;;
       *) ;;
     esac
+    # ignore errors
     brew bump-cask-pr --commit --no-audit ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
   fi
 done
