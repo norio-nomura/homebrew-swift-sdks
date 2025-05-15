@@ -19,7 +19,7 @@ jobs:
           git config --global user.email github-actions@github.com
           brew tap norio-nomura/swift-sdks
           cd "$(brew --repo norio-nomura/swift-sdks)"
-          git remote set-url origin "https://${GITHUB_REPOSITORY_OWNER}:${HOMEBREW_GITHUB_API_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote set-url origin "https://x-access-token:${HOMEBREW_GITHUB_API_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           ./bump-casks.sh || failed=1
           git push origin main
           [[ -z "${failed}" ]]
