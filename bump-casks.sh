@@ -37,7 +37,7 @@ do
       *) ;;
     esac
     # ignore errors
-    brew bump-cask-pr --commit --no-audit ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
+    brew bump-cask-pr --commit --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
   fi
 done
 [[ "${failed}" -eq 0 ]]
