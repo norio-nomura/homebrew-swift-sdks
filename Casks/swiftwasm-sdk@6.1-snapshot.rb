@@ -8,7 +8,7 @@ cask "swiftwasm-sdk@6.1-snapshot" do
   url "https://github.com/swiftwasm/swift/releases/download/#{release_name}/#{artifactbundle_name}.zip",
       verified: "github.com/swiftwasm/swift/"
   name "Swift SDK for WebAssembly 6.1-SNAPSHOT"
-  desc "Swift SDK for WebAssembly"
+  desc "Swift SDK for WebAssembly 6.1-SNAPSHOT"
   homepage "https://swiftwasm.org/"
 
   livecheck do
