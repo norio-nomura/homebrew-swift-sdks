@@ -1,28 +1,22 @@
 cask "swiftwasm-sdk@development-snapshot" do
-  version "2025-06-03-a"
-  sha256 "e01b9946d1372089dc57146e4b2e2329e5d374c36b57743950518c8bddc8d224"
+  version "2025-06-09-a"
+  sha256 "5a65caa036f88ebecd6bd1e4ecdda9a7fac7ae22c71427a22f9ad2d58bc950fe"
 
-  release_name="swift-wasm-DEVELOPMENT-SNAPSHOT-#{version}"
-  artifactbundle_name="#{release_name}-wasm32-unknown-wasi.artifactbundle"
+  release_name="swift-DEVELOPMENT-SNAPSHOT-#{version}"
+  artifactbundle_name="#{release_name}_wasm.artifactbundle"
+  webroot="development"
 
-  url "https://github.com/swiftwasm/swift/releases/download/#{release_name}/#{artifactbundle_name}.zip",
-      verified: "github.com/swiftwasm/swift/"
-  name "Swift SDK for WebAssembly DEVELOPMENT-SNAPSHOT"
-  desc "Swift SDK for WebAssembly"
-  homepage "https://swiftwasm.org/"
+  url "https://download.swift.org/#{webroot}/wasm-sdk/#{release_name}/#{artifactbundle_name}.tar.gz"
+  name "Swift Wasm SDK Development Snapshot"
+  desc "Swift Wasm SDK Development Snapshot"
+  homepage "https://www.swift.org/"
 
   livecheck do
-    url :url
-    regex(/^swift-wasm-DEVELOPMENT-SNAPSHOT-(\d+-\d+-\d+-a)$/)
-    strategy :github_releases do |json, regex|
-      json.map do |release|
-        next if release["draft"]
-
-        match = release["tag_name"]&.match(regex)
-        next if match.blank?
-
-        match[1]
-      end
+    url "https://github.com/swiftlang/swift-org-website/raw/refs/heads/main/_data/builds/#{webroot.tr(".", "_")}/wasm-sdk.yml"
+    regex(/swift-(\d+\.\d+-)?DEVELOPMENT-SNAPSHOT-(\d+-\d+-\d+-a)/)
+    strategy :yaml do |yaml, regex|
+      yaml.select { |item| item["dir"]&.match?(regex) }
+          .map { |item| item["dir"][regex, 2] }
     end
   end
 
