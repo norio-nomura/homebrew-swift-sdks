@@ -12,7 +12,7 @@ cask "static-linux-sdk@6.2-development-snapshot" do
   homepage "https://www.swift.org/"
 
   livecheck do
-    url "https://github.com/swiftlang/swift-org-website/raw/refs/heads/main/_data/builds/#{webroot.tr(".", "_")}/static_sdk.yml"
+    url "https://github.com/swiftlang/swift-org-website/raw/refs/heads/main/_data/builds/#{webroot.tr(".", "_")}/static-sdk.yml"
     regex(/swift-(\d+\.\d+-)?DEVELOPMENT-SNAPSHOT-(\d+-\d+-\d+-a)/)
     strategy :yaml do |yaml, regex|
       yaml.select { |item| item["dir"]&.match?(regex) }
