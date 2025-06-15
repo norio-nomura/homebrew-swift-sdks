@@ -25,7 +25,7 @@ do
         downloaded_json=$(curl -fsSL "${final_url}"|yq -o=json -)
         sha256=$(jq -r 'reverse|map(.platforms|.[]|select(.platform == "static-sdk"))|first|.checksum' <<<"${downloaded_json}")
         ;;
-      */static_sdk.yml)
+      */*.yml)
         final_url="$(jq -r '.[0].meta.url.final' <<<"${json}")"
         regex="$(jq -r '.[0].meta.regex|sub("^/(?<x>.*)/$";.x)|gsub("\\\\";"\\\\")' <<<"${json}")"
         downloaded_json=$(curl -fsSL "${final_url}"|yq -o=json -)
@@ -37,7 +37,10 @@ do
       *) ;;
     esac
     # ignore errors
-    brew bump-cask-pr --commit --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
+    brew bump-cask-pr --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
+    cask_name="$(jq -r '.[0].cask' <<<"${json}")"
+    git commit -m "${cask_name} ${version}" "${cask}"
   fi
 done
+echo exit status: "${failed}"
 [[ "${failed}" -eq 0 ]]
