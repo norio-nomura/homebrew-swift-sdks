@@ -1,28 +1,21 @@
 cask "swiftwasm-sdk" do
-  version "6.1"
-  sha256 "7550b4c77a55f4b637c376f5d192f297fe185607003a6212ad608276928db992"
+  version "6.2"
+  sha256 "fe4e8648309fce86ea522e9e0d1dc48e82df6ba6e5743dbf0c53db8429fb5224"
 
-  release_name="swift-wasm-#{version}-RELEASE"
-  artifactbundle_name="#{release_name}-wasm32-unknown-wasi.artifactbundle"
+  release_name="swift-#{version}-RELEASE"
+  artifactbundle_name="#{release_name}_wasm.artifactbundle"
 
-  url "https://github.com/swiftwasm/swift/releases/download/#{release_name}/#{artifactbundle_name}.zip",
-      verified: "github.com/swiftwasm/swift/"
+  url "https://download.swift.org/#{release_name.downcase}/wasm/#{release_name}/#{artifactbundle_name}.tar.gz"
   name "Swift SDK for WebAssembly"
   desc "Swift SDK for WebAssembly"
-  homepage "https://swiftwasm.org/"
+  homepage "https://www.swift.org/"
 
   livecheck do
-    url :url
-    regex(/^swift-wasm-(\d+\.\d+(\.\d+)?)-RELEASE$/)
-    strategy :github_releases do |json, regex|
-      json.map do |release|
-        next if release["draft"] || release["prerelease"]
-
-        match = release["tag_name"]&.match(regex)
-        next if match.blank?
-
-        match[1]
-      end
+    url "https://github.com/swiftlang/swift-org-website/raw/refs/heads/main/_data/builds/swift_releases.yml"
+    strategy :yaml do |yaml|
+      yaml.reverse.find do |item|
+        item["platforms"].any? { |platform| platform["platform"] == "wasm-sdk" }
+      end["name"]
     end
   end
 
