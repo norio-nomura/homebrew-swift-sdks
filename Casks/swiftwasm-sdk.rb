@@ -5,7 +5,7 @@ cask "swiftwasm-sdk" do
   release_name="swift-#{version}-RELEASE"
   artifactbundle_name="#{release_name}_wasm.artifactbundle"
 
-  url "https://download.swift.org/#{release_name.downcase}/wasm/#{release_name}/#{artifactbundle_name}.tar.gz"
+  url "https://download.swift.org/#{release_name.downcase}/wasm-sdk/#{release_name}/#{artifactbundle_name}.tar.gz"
   name "Swift SDK for WebAssembly"
   desc "Swift SDK for WebAssembly"
   homepage "https://www.swift.org/"
