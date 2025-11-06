@@ -19,11 +19,17 @@ do
   then
     # detect sha256
     original_url="$(jq -r '.[0]|.version as $v|.meta.url.original|gsub($v.current|gsub("\\.";"\\.");$v.latest)' <<<"${json}")"
+    cask_name="$(jq -r '.[0].cask' <<<"${json}")"
     case "${original_url}" in
       */swift_releases.yml)
         final_url="$(jq -r '.[0].meta.url.final' <<<"${json}")"
         downloaded_json=$(curl -fsSL "${final_url}"|yq -o=json -)
-        sha256=$(jq -r 'reverse|map(.platforms|.[]|select(.platform == "static-sdk"))|first|.checksum' <<<"${downloaded_json}")
+        case "${cask_name}" in
+          static-linux-*) platform_key="static-sdk";;
+          swiftwasm-*) platform_key="wasm-sdk";;
+          *) continue;;
+        esac
+        sha256=$(jq -r 'reverse|map(.platforms|.[]|select(.platform == "'"${platform_key}"'"))|first|.checksum' <<<"${downloaded_json}")
         ;;
       */*.yml)
         final_url="$(jq -r '.[0].meta.url.final' <<<"${json}")"
@@ -38,7 +44,6 @@ do
     esac
     # ignore errors
     brew bump-cask-pr --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
-    cask_name="$(jq -r '.[0].cask' <<<"${json}")"
     git commit -m "${cask_name} ${version}" "${cask}"
   fi
 done
