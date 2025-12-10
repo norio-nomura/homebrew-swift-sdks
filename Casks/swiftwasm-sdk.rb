@@ -1,6 +1,6 @@
 cask "swiftwasm-sdk" do
-  version "6.2.1"
-  sha256 "482b9f95462b87bedfafca94a092cf9ec4496671ca13b43745097122d20f18af"
+  version "6.2.2"
+  sha256 "128fa003e0cad624897c2b1d5f07cedf400e3c8bd851d304e57440b591cbe606"
 
   release_name="swift-#{version}-RELEASE"
   artifactbundle_name="#{release_name}_wasm.artifactbundle"
