@@ -3,7 +3,8 @@ cask "static-linux-sdk" do
   sha256 "24bdf84495dd31a6de2eb679647c1982b747bfbfe1a2060c779d84dcecd902a4"
 
   release_name="swift-#{version}-RELEASE"
-  artifactbundle_name="#{release_name}_static-linux-0.0.1.artifactbundle"
+  # TODO: Update the version number in the artifact bundle name when the version is updated.
+  artifactbundle_name="#{release_name}_static-linux-0.1.0.artifactbundle"
 
   url "https://download.swift.org/#{release_name.downcase}/static-sdk/#{release_name}/#{artifactbundle_name}.tar.gz"
   name "Swift Static Linux SDK"
