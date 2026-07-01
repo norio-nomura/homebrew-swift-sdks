@@ -1,6 +1,6 @@
 cask "static-linux-sdk" do
-  version "6.3.2"
-  sha256 "3fd798bef6f4408f1ea5a6f94ce4d4052830c4326ab85ebc04f983f01b3da407"
+  version "6.3.3"
+  sha256 "87c3eaf908e67c0e13a84367119e12273cec1d2cd3d81f7d74bb36722d6b607b"
 
   release_name="swift-#{version}-RELEASE"
   # TODO: Update the version number in the artifact bundle name when the version is updated.
