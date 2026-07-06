@@ -3,7 +3,7 @@ cask "static-linux-sdk@development-snapshot" do
   sha256 "675ee24d2abd464debef63a2bab33ccaf8b8c00ca7b29eb429420a8794b1a092"
 
   release_name="swift-DEVELOPMENT-SNAPSHOT-#{version}"
-  artifactbundle_name="#{release_name}_static-linux-0.0.1.artifactbundle"
+  artifactbundle_name="#{release_name}_static-linux-0.1.0.artifactbundle"
   webroot="development"
 
   url "https://download.swift.org/#{webroot}/static-sdk/#{release_name}/#{artifactbundle_name}.tar.gz"
