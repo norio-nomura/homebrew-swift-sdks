@@ -1,6 +1,6 @@
 cask "swiftwasm-sdk@6.4.x-development-snapshot" do
-  version "2026-08-26-a"
-  sha256 "fbaa7e01a96ab237cc639ece25af620ec162336d57633858c2d6454af87d878c"
+  version "2026-08-28-a"
+  sha256 "6716fbb983cdaa2f04e38492b1440c52d99b4ba30a88965efb80ddc9ab267816"
 
   release_name="swift-6.4.x-DEVELOPMENT-SNAPSHOT-#{version}"
   artifactbundle_name="#{release_name}_wasm.artifactbundle"
