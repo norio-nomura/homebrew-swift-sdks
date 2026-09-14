@@ -1,6 +1,6 @@
 cask "static-linux-sdk@6.4.x-development-snapshot" do
-  version "2026-09-04-a"
-  sha256 "c38ebb276944eb13294c181b7212f260ef80338877c7ef9fd672ee2cbf9257d9"
+  version "2026-09-10-a"
+  sha256 "a99b063cc553a11aba025803d4f3fa262d85751c1f4101e18ac8c41d38acd45a"
 
   release_name="swift-6.4.x-DEVELOPMENT-SNAPSHOT-#{version}"
   artifactbundle_name="#{release_name}_static-linux-0.1.0.artifactbundle"
