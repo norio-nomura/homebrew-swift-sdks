@@ -4,7 +4,8 @@ set -euo pipefail
 failed=0
 for cask in Casks/*.rb
 do
-  if ! json=$(brew livecheck --cask --json --verbose "${cask}" 2>/dev/null)
+  cask_name="$(basename "${cask}" .rb)"
+  if ! json=$(brew livecheck --cask --json --verbose "${cask_name}")
   then
     failed=$((failed + 1))
     continue
@@ -43,7 +44,7 @@ do
       *) ;;
     esac
     # ignore errors
-    brew bump-cask-pr --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask}"
+    brew bump-cask-pr --no-audit --no-fork ${sha256:+--sha256 ${sha256}} --version "${version}" --write-only "${cask_name}"
     git commit -m "${cask_name} ${version}" "${cask}"
   fi
 done
